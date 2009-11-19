@@ -4,7 +4,7 @@
 	<groupId>net.sf.outliner-me</groupId>
 	<artifactId>outliner-me</artifactId>
 	<name>Outliner ME</name>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<url>http://sourceforge.net/projects/outliner-me/</url>
 	<build>
 		<plugins>
@@ -46,7 +46,7 @@
                         <MIDlet>
                             <name>HelloWorld</name>
                             <!-- <icon>/me2-icon.png</icon>  -->
-                            <class>me.outliner.midlet.OutlinerMIDlet</class>
+                            <class>net.sf.outlinerme.ui.OutlinerMIDlet</class>
                         </MIDlet>
                     </midlets>
                 </configuration>
