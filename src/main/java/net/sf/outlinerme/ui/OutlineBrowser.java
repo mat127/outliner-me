@@ -1,10 +1,9 @@
-package net.sf.outlinerme.browser;
+package net.sf.outlinerme.ui;
 
 import java.util.Enumeration;
 
 import javax.microedition.lcdui.List;
 
-import net.sf.outlinerme.midlet.OutlinerMIDlet;
 import net.sf.outlinerme.outline.OutlineItem;
 
 

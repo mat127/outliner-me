@@ -1,7 +1,8 @@
-package net.sf.outlinerme.midlet;
+package net.sf.outlinerme.ui;
 
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Displayable;
+
 
 public abstract class OutlinerCommand extends Command {
 
