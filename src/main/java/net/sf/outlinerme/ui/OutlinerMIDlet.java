@@ -21,21 +21,35 @@ public class OutlinerMIDlet extends MIDlet implements CommandListener {
     public static Command view =
         new OutlinerCommand("View", Command.ITEM, 1) {
             public void execute(OutlinerMIDlet midlet, Displayable displayable) {
-                midlet.viewSelected((List) displayable);
+                midlet.showSelectedItem((OutlineBrowser) displayable);
             }
         };
 
     public static Command back =
         new OutlinerCommand("Back", Command.BACK, 1) {
             public void execute(OutlinerMIDlet midlet, Displayable displayable) {
-                midlet.viewParent();
+                midlet.showParentItem();
             }
         };
 
-    public static Command delete =
-        new OutlinerCommand("Delete", Command.ITEM, 2) {
+    public static Command remove =
+        new OutlinerCommand("Remove", Command.ITEM, 2) {
             public void execute(OutlinerMIDlet midlet, Displayable displayable) {
-                midlet.deleteSelected((List)displayable);
+                midlet.removeSelected((OutlineBrowser)displayable);
+            }
+    }; 
+
+    public static Command create =
+        new OutlinerCommand("Create", Command.ITEM, 2) {
+            public void execute(OutlinerMIDlet midlet, Displayable displayable) {
+                midlet.createNewItem();
+            }
+    }; 
+
+    public static Command modify =
+        new OutlinerCommand("Modify", Command.ITEM, 2) {
+            public void execute(OutlinerMIDlet midlet, Displayable displayable) {
+                midlet.modifySelectedDescription((OutlineBrowser) displayable);
             }
     }; 
 
@@ -66,11 +80,6 @@ public class OutlinerMIDlet extends MIDlet implements CommandListener {
 
     public void destroyApp(boolean b) { }
 
-    public void showCurrentItem() {
-        Screen scr = new OutlineBrowser(this, this.outlineEditor.getCurrent());
-        Display.getDisplay(this).setCurrent(scr);
-    }
-
     // A convenience method for exiting
     void exitRequested() {
         destroyApp(false);
@@ -86,7 +95,13 @@ public class OutlinerMIDlet extends MIDlet implements CommandListener {
         }
     }
 
-    private void viewParent() {
+    public void showCurrentItem() {
+        OutlineItem current = this.outlineEditor.getCurrent();
+        Screen scr = new OutlineBrowser(this, current);
+        Display.getDisplay(this).setCurrent(scr);
+    }
+
+    public void showParentItem() {
 
         if(this.outlineEditor.atRoot())
             return;
@@ -96,30 +111,53 @@ public class OutlinerMIDlet extends MIDlet implements CommandListener {
         this.showCurrentItem();
     }
 
-    private void viewSelected(final List outlineBrowser) {
+    public void showSelectedItem(final OutlineBrowser outlineBrowser) {
 
-        int selectedIndex = outlineBrowser.getSelectedIndex();
-        if(selectedIndex == 0)
+        if(outlineBrowser.atRoot())
             return;
 
-        this.outlineEditor.goToChildAt(selectedIndex - 1);
+        int selectedChildIndex = outlineBrowser.getSelectedChildIndex();
+        this.outlineEditor.goToChildAt(selectedChildIndex);
 
         this.showCurrentItem();
     }
 
-    protected void deleteSelected(final List outlineBrowser) {
+    protected void removeSelected(final OutlineBrowser outlineBrowser) {
 
-        int selectedIndex = outlineBrowser.getSelectedIndex();
-
-        if(selectedIndex == 0) {
-            if(!this.outlineEditor.atRoot())
-                this.outlineEditor.removeCurrent();
+        if(outlineBrowser.atRoot()) {
+            this.removeCurrentItem();
         }
 
         else {
-            this.outlineEditor.removeCurrentChildAt(selectedIndex - 1);
+            int selectedChildIndex = outlineBrowser.getSelectedChildIndex();
+            this.outlineEditor.removeCurrentChildAt(selectedChildIndex);
         }
 
         this.showCurrentItem();
     }
+
+    public void removeCurrentItem() {
+        if(!this.outlineEditor.atRoot())
+            this.outlineEditor.removeCurrent();
+    }
+
+    public void createNewItem() {
+        OutlineItem newItem = new OutlineItem();
+        Screen scr = new NewOutlineItemEditor(this, newItem);
+        Display.getDisplay(this).setCurrent(scr);
+    }
+
+    public void addChildToCurrent(final OutlineItem newChild) {
+        this.outlineEditor.addChildToCurrent(newChild);
+    }
+
+    public void modifySelectedDescription(final OutlineBrowser outlineBrowser) {
+
+        OutlineItem selectedItem =
+            outlineBrowser.getSelectedItem(this.outlineEditor);
+
+        Screen scr = new OutlineItemEditor(this, selectedItem);
+        Display.getDisplay(this).setCurrent(scr);
+    }
+
 }

@@ -16,6 +16,11 @@ public class OutlineEditor {
         return (OutlineItem) this.path.peek();
     }
 
+    public OutlineItem getCurrentChildAt(final int index) {
+        OutlineItem current = this.getCurrent();
+        return current.getChildAt(index);
+    }
+
     public void goToChildAt(final int index) {
         OutlineItem current = this.getCurrent();
         this.path.push(current.getChildAt(index));
@@ -44,9 +49,20 @@ public class OutlineEditor {
         current.removeChild(child);
     }
 
-    public void removeCurrentChildAt(int index) {
+    public void removeCurrentChildAt(final int index) {
         OutlineItem current = this.getCurrent();
         current.removeChildAt(index);
+    }
+
+    public OutlineItem createNewChild() {
+        OutlineItem newChild = new OutlineItem();
+        this.addChildToCurrent(newChild);
+        return newChild;
+    }
+
+    public void addChildToCurrent(final OutlineItem newChild) {
+        OutlineItem current = this.getCurrent();
+        current.add(newChild);
     }
 
 }
