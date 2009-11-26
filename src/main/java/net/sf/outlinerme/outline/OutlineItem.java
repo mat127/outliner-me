@@ -54,14 +54,14 @@ public class OutlineItem {
         if(childs == null)
             return;
 
-        this.childs.ensureCapacity(this.childCount() + childs.length);
+        this.childs.ensureCapacity(this.getChildCount() + childs.length);
 
         for(int i = 0; i < childs.length; i++) {
             this.add(childs[i]);
         }
     }
 
-    public int childCount() {
+    public int getChildCount() {
         return this.childs.size();
     }
 
