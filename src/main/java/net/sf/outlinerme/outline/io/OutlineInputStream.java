@@ -45,5 +45,10 @@ public class OutlineInputStream {
 
         return childItems;
     }
+
+    public static OutlineItem readOutlineFrom(final InputStream stream) throws IOException {
+        OutlineInputStream input = new OutlineInputStream(stream);
+        return input.readOutline();
+    }
     
 }

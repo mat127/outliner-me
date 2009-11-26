@@ -39,4 +39,13 @@ public class OutlineOutputStream {
             this.writeOutline(childItem);
         }
     }
+
+    public static void writeOutlineTo(
+        final OutlineItem item,
+        final OutputStream stream
+    ) throws IOException
+    {
+        OutlineOutputStream output = new OutlineOutputStream(stream);
+        output.writeOutline(item);
+    }
 }
