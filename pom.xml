@@ -6,6 +6,7 @@
 	<name>Outliner ME</name>
 	<version>0.1.0-SNAPSHOT</version>
 	<url>http://sourceforge.net/projects/outliner-me/</url>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -33,10 +34,7 @@
                     <wtkHome>${wtk.home}</wtkHome>
                     <proguard>false</proguard>
                     <obfuscate>false</obfuscate>
-			        <midletVendor>xyz</midletVendor>
-                    <jadAttributes>
-                        <Created-By>Petr Matousek</Created-By>
-                    </jadAttributes>
+			        <midletVendor>mat127</midletVendor>
                     <archive>
                         <manifestEntries>
                             <url>${pom.url}</url>
@@ -44,7 +42,7 @@
                     </archive>
                     <midlets>
                         <MIDlet>
-                            <name>HelloWorld</name>
+                            <name>Outliner ME</name>
                             <!-- <icon>/me2-icon.png</icon>  -->
                             <class>net.sf.outlinerme.ui.OutlinerMIDlet</class>
                         </MIDlet>
@@ -53,7 +51,5 @@
             </plugin>
 		</plugins>
 	</build>
-	<properties>
-		<wtk.home>/home/pema/opt/wtk-2.5.2/</wtk.home>
-	</properties>
+
 </project>
