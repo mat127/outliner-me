@@ -47,7 +47,7 @@ public class OutlineBrowser extends List {
             this.append(child.getDescription(), OutlineBrowser.FOLDER_ICON);
         }
         
-        this.setSelectCommand(OutlinerMIDlet.view);
+        this.setSelectCommand(OutlinerMIDlet.select);
 
         this.addCommand(OutlinerMIDlet.exit);
         this.addCommand(OutlinerMIDlet.back);

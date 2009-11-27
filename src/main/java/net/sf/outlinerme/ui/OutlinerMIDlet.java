@@ -18,10 +18,10 @@ public class OutlinerMIDlet extends MIDlet implements CommandListener {
             }
         };
 
-    public static Command view =
+    public static Command select =
         new OutlinerCommand("View", Command.ITEM, 1) {
             public void execute(OutlinerMIDlet midlet, Displayable displayable) {
-                midlet.showSelectedItem((OutlineBrowser) displayable);
+                midlet.selectItem((OutlineBrowser) displayable);
             }
         };
 
@@ -111,10 +111,22 @@ public class OutlinerMIDlet extends MIDlet implements CommandListener {
         this.showCurrentItem();
     }
 
+    public void selectItem(final OutlineBrowser outlineBrowser) {
+
+        if(outlineBrowser.atRoot()) {
+            this.modifySelectedDescription(outlineBrowser);
+        }
+
+        else {
+            this.showSelectedItem(outlineBrowser);
+        }
+    }
+
     public void showSelectedItem(final OutlineBrowser outlineBrowser) {
 
-        if(outlineBrowser.atRoot())
+        if(outlineBrowser.atRoot()) {
             return;
+        }
 
         int selectedChildIndex = outlineBrowser.getSelectedChildIndex();
         this.outlineEditor.goToChildAt(selectedChildIndex);
@@ -155,6 +167,11 @@ public class OutlinerMIDlet extends MIDlet implements CommandListener {
 
         OutlineItem selectedItem =
             outlineBrowser.getSelectedItem(this.outlineEditor);
+
+        this.modifyItemDescription(selectedItem);
+    }
+
+    public void modifyItemDescription(final OutlineItem selectedItem) {
 
         Screen scr = new OutlineItemEditor(this, selectedItem);
         Display.getDisplay(this).setCurrent(scr);
