@@ -1,6 +1,5 @@
 package net.sf.outlinerme.ui;
 
-import net.sf.outlinerme.outline.OutlineEditor;
 import net.sf.outlinerme.outline.OutlineItem;
 
 
