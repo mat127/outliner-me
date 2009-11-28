@@ -65,4 +65,8 @@ public class OutlineEditor {
         current.add(newChild);
     }
 
+    public OutlineItem getRoot() {
+        return (OutlineItem) this.path.firstElement();
+    }
+
 }
