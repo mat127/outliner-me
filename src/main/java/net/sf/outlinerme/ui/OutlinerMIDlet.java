@@ -6,10 +6,15 @@ import javax.microedition.lcdui.*;
 
 import net.sf.outlinerme.outline.OutlineEditor;
 import net.sf.outlinerme.outline.OutlineItem;
+import net.sf.outlinerme.outline.io.OutlineDao;
+import net.sf.outlinerme.outline.io.OutlineDaoException;
+import net.sf.outlinerme.outline.io.rms.OutlineDaoRecordStore;
 
 
 
 public class OutlinerMIDlet extends MIDlet implements CommandListener {
+
+    private static final String DEFAULT_OUTLINE_NAME = "OutlineName";
 
     public static Command exit =
         new OutlinerCommand("Exit", Command.EXIT, 3) {
@@ -55,9 +60,21 @@ public class OutlinerMIDlet extends MIDlet implements CommandListener {
 
     private OutlineEditor outlineEditor;
 
+    private OutlineDao dao = new OutlineDaoRecordStore();
+
     public OutlinerMIDlet() {
-        OutlineItem outline = OutlinerMIDlet.createSampleOutline();
+        OutlineItem outline = this.loadOutline();
         this.outlineEditor = new OutlineEditor(outline);
+    }
+
+    private OutlineItem loadOutline() {
+        OutlineItem outline;
+        try {
+            outline = dao.read(DEFAULT_OUTLINE_NAME);
+        } catch (OutlineDaoException e) {
+            outline = OutlinerMIDlet.createSampleOutline();
+        }
+        return outline;
     }
 
     private static OutlineItem createSampleOutline() {
@@ -72,6 +89,15 @@ public class OutlinerMIDlet extends MIDlet implements CommandListener {
         });
     }
 
+    private void saveOutline() {
+        OutlineItem outline = this.outlineEditor.getRoot();
+        try {
+            this.dao.write(outline, OutlinerMIDlet.DEFAULT_OUTLINE_NAME);
+        } catch (OutlineDaoException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void startApp() {
         this.showCurrentItem();
     }
@@ -82,6 +108,7 @@ public class OutlinerMIDlet extends MIDlet implements CommandListener {
 
     // A convenience method for exiting
     void exitRequested() {
+        this.saveOutline();
         destroyApp(false);
         notifyDestroyed();
     }
