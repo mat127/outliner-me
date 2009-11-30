@@ -79,13 +79,13 @@ public class OutlinerMIDlet extends MIDlet implements CommandListener {
 
     private static OutlineItem createSampleOutline() {
 
-        return new OutlineItem("root", new OutlineItem [] {
-            new OutlineItem("A1"),
-            new OutlineItem("A2", new OutlineItem [] {
-                new OutlineItem("B1"),
-                new OutlineItem("B2")
+        return new OutlineItem("outline root", new OutlineItem [] {
+            new OutlineItem("item 1"),
+            new OutlineItem("item 2", new OutlineItem [] {
+                new OutlineItem("subitem 1"),
+                new OutlineItem("subitem 2")
             }),
-            new OutlineItem("A3")
+            new OutlineItem("item 3")
         });
     }
 
