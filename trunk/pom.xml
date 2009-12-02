@@ -43,7 +43,7 @@
                     <midlets>
                         <MIDlet>
                             <name>Outliner ME</name>
-                            <!-- <icon>/me2-icon.png</icon>  -->
+                            <icon>/net/sf/outlinerme/icons/outliner.png</icon>
                             <class>net.sf.outlinerme.ui.OutlinerMIDlet</class>
                         </MIDlet>
                     </midlets>
