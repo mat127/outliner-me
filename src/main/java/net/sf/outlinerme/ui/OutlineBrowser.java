@@ -15,21 +15,21 @@ public class OutlineBrowser extends List {
     
     private static final String BROWSER_TITLE = "Outliner ME";
 
-    private static Image OUTLINE_ICON = null;
+    private static Image FOLDER_ICON = null;
     private static Image ITEM_ICON = null;
 
     static {
         try {
-            OutlineBrowser.OUTLINE_ICON =
-                Image.createImage("/net/sf/outlinerme/icons/outline.png");
+            OutlineBrowser.FOLDER_ICON =
+                Image.createImage("/net/sf/outlinerme/icons/dir.png");
         }
         catch (IOException e) {
-            OutlineBrowser.OUTLINE_ICON = Image.createImage(1, 1);
+            OutlineBrowser.FOLDER_ICON = Image.createImage(1, 1);
         }
 
         try {
             OutlineBrowser.ITEM_ICON =
-                Image.createImage("/net/sf/outlinerme/icons/item.png");
+                Image.createImage("/net/sf/outlinerme/icons/file.png");
         }
         catch (IOException e) {
             OutlineBrowser.ITEM_ICON = Image.createImage(1, 1);
@@ -44,7 +44,7 @@ public class OutlineBrowser extends List {
 
         for(Enumeration childs = item.getChilds(); childs.hasMoreElements(); ) {
             OutlineItem child = (OutlineItem) childs.nextElement();
-            this.append(this.getDescription(child), OutlineBrowser.OUTLINE_ICON);
+            this.append(this.getDescription(child), OutlineBrowser.FOLDER_ICON);
         }
         
         this.setSelectCommand(OutlinerMIDlet.select);
