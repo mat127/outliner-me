@@ -44,7 +44,7 @@ public class OutlineBrowser extends List {
 
         for(Enumeration childs = item.getChilds(); childs.hasMoreElements(); ) {
             OutlineItem child = (OutlineItem) childs.nextElement();
-            this.append(this.getDescription(child), OutlineBrowser.OUTLINE_ICON);
+            this.append(this.getDescription(child), OutlineBrowser.FOLDER_ICON);
         }
         
         this.setSelectCommand(OutlinerMIDlet.select);
