@@ -40,11 +40,11 @@ public class OutlineBrowser extends List {
 
         super(BROWSER_TITLE, List.IMPLICIT);
 
-        this.append(item.getDescription(), OutlineBrowser.ITEM_ICON);
+        this.append(this.getDescription(item), OutlineBrowser.ITEM_ICON);
 
         for(Enumeration childs = item.getChilds(); childs.hasMoreElements(); ) {
             OutlineItem child = (OutlineItem) childs.nextElement();
-            this.append(child.getDescription(), OutlineBrowser.FOLDER_ICON);
+            this.append(this.getDescription(child), OutlineBrowser.OUTLINE_ICON);
         }
         
         this.setSelectCommand(OutlinerMIDlet.select);
@@ -56,6 +56,14 @@ public class OutlineBrowser extends List {
         this.addCommand(OutlinerMIDlet.modify);
         
         this.setCommandListener(midlet);
+    }
+
+    private String getDescription(final OutlineItem item) {
+        String description = item.getDescription();
+        int newLineIndex = description.indexOf('\n');
+        if(newLineIndex >= 0)
+            description = description.substring(0, newLineIndex);
+        return description;
     }
 
     public boolean atRoot() {
@@ -81,5 +89,4 @@ public class OutlineBrowser extends List {
             return outlineEditor.getCurrentChildAt(selectedChildIndex);
         }
     }
-    
 }
