@@ -34,7 +34,11 @@
                     <wtkHome>${wtk.home}</wtkHome>
                     <proguard>false</proguard>
                     <obfuscate>false</obfuscate>
+                    <appendClassifier>false</appendClassifier>
 			        <midletVendor>mat127</midletVendor>
+			        <jadAttributes>
+				        <MIDlet-Jar-URL>http://downloads.sourceforge.net/project/outliner-me/outliner-me/${project.version}/${project.build.finalName}.jar</MIDlet-Jar-URL>
+			        </jadAttributes>
                     <archive>
                         <manifestEntries>
                             <url>${pom.url}</url>
