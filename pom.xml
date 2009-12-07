@@ -4,7 +4,7 @@
 	<groupId>net.sf.outliner-me</groupId>
 	<artifactId>outliner-me</artifactId>
 	<name>Outliner ME</name>
-	<version>0.3.0-snapshot</version>
+	<version>0.2.1</version>
 	<url>http://sourceforge.net/projects/outliner-me/</url>
 
 	<build>
@@ -34,7 +34,11 @@
                     <wtkHome>${wtk.home}</wtkHome>
                     <proguard>false</proguard>
                     <obfuscate>false</obfuscate>
+                    <appendClassifier>false</appendClassifier>
 			        <midletVendor>mat127</midletVendor>
+			        <jadAttributes>
+				        <MIDlet-Jar-URL>http://downloads.sourceforge.net/project/outliner-me/outliner-me/${project.version}/${project.build.finalName}.jar</MIDlet-Jar-URL>
+			        </jadAttributes>
                     <archive>
                         <manifestEntries>
                             <url>${pom.url}</url>
