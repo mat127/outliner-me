@@ -54,6 +54,7 @@ public class OutlineBrowser extends List {
         this.addCommand(OutlinerMIDlet.create);
         this.addCommand(OutlinerMIDlet.remove);
         this.addCommand(OutlinerMIDlet.modify);
+        this.addCommand(OutlinerMIDlet.about);
         
         this.setCommandListener(midlet);
     }
