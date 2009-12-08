@@ -23,6 +23,13 @@ public class OutlinerMIDlet extends MIDlet implements CommandListener {
             }
         };
 
+    public static Command about =
+        new OutlinerCommand("About", Command.HELP, 3) {
+            public void execute(OutlinerMIDlet midlet, Displayable displayable) {
+                midlet.showAboutDialog();
+            }
+        };
+
     public static Command select =
         new OutlinerCommand("View", Command.ITEM, 1) {
             public void execute(OutlinerMIDlet midlet, Displayable displayable) {
@@ -205,4 +212,19 @@ public class OutlinerMIDlet extends MIDlet implements CommandListener {
         Display.getDisplay(this).setCurrent(scr);
     }
 
+    public void showAboutDialog() {
+        Alert alert = new Alert("Info",
+            "Outliner ME\n\n" +
+            "Visit project homepage\n\n" +
+            "http://sf.net/projects/outliner-me/\n\n" +
+            "for updates and support.\n\n" +
+            "You are strongly encouraged to suggest improvements" +
+            " or report bugs via tracker there.\n\n" +
+            "Also leaving note in the forum about about compatibility" +
+            " with your device would be nice.",
+            null, AlertType.INFO
+        );
+        alert.setTimeout(Alert.FOREVER);
+        Display.getDisplay(this).setCurrent(alert);
+    }
 }
